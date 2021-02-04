@@ -62,16 +62,16 @@
                                 Main
                             </a>
                             <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                About Me
+                            </a>
+                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-image"></i></div>
                                 Portfolio
                             </a>
                             <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-image"></i></div>
                                 Certificate
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                About Me
                             </a>
                             <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
