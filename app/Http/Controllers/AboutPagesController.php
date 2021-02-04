@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AboutRequest;
 use App\About;
+use App\Http\Requests\AboutRequest;
 
-class AboutController extends Controller
+class AboutPagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.about.create');
     }
 
     /**
@@ -34,9 +34,20 @@ class AboutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AboutRequest $request)
     {
-        //
+        // $about = new About;
+        // $about->judul = $request->judul;
+        // $about->picture = $request->picture;
+        // $about->description = $request->description;
+
+        // $about->save();
+        // return redirect()->route('admin.about.create');
+
+        $data = $request->all();
+
+        About::create($data);
+        return redirect()->route('admin.about.create');
     }
 
     /**

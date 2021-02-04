@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'PagesController@index')->name('home');
+Auth::routes(['register' => true]);
 Route::get('/admin/dashboard', 'PagesController@dashboard')->name('admin.dashboard');
 Route::get('/admin/main', 'MainPagesController@index')->name('admin.main');
 Route::put('/admin/main', 'MainPagesController@update')->name('admin.main.update');
+Route::get('/admin/about/create', 'AboutPagesController@create')->name('admin.about.create');
+Route::post('/admin/about/create', 'AboutPagesController@store')->name('admin.about.store');
 
-Auth::routes();
+
 
 // Route::get('/home', 'HomeController@index')->name('home');

@@ -24,8 +24,9 @@ class AboutRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|image',
-            'description' => 'required'
+            'judul' => 'required|string',
+            'picture' => 'required|string',
+            'description' => 'required|string'
 
         ];
     }

@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class About extends Model
 {
+    public $table = "about";
     protected $fillable = [
-        'picture','description'
+        'judul','picture','description'
     ];
+
+    
 }
