@@ -8,14 +8,19 @@ use App\Http\Requests\AboutRequest;
 
 class AboutPagesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
-        //
+        $about =  About::all();
+        return view('pages.about.list', compact('about'));
     }
 
     /**
@@ -69,7 +74,8 @@ class AboutPagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $about = About::find($id);
+        return view('pages.about.edit', compact('about'));
     }
 
     /**
@@ -79,9 +85,14 @@ class AboutPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AboutRequest $request, $id)
     {
-        //
+        $data = About::find($id);
+        $data->judul = $request->judul;
+        $data->picture = $request->picture;
+        $data->description = $request->description;
+        $data->save();
+        return redirect()->route('admin.about.list');
     }
 
     /**
@@ -92,6 +103,9 @@ class AboutPagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $about = About::findOrFail($id);
+        $about->delete();
+
+        return redirect()->route('admin.about.list');
     }
 }

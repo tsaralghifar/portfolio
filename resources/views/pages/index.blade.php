@@ -133,9 +133,19 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- About Section Content-->
-                <div class="row">
-                    <div class="col-lg-4 ml-auto"><p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p></div>
-                    <div class="col-lg-4 mr-auto"><p class="lead">You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p></div>
+                <div class="row justify-content-center text-center">
+                    @if (count($about) > 0)
+                    @foreach ($about as $data)
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x">
+                                <i class="fas fa-cirle fa-stack-2x text-primary"></i>
+                                <i class="<?= $data->picture ?> fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <h4 class="my-3">{{ $data->judul }}</h4>
+                            <p class="text-center lead">{{ $data->description }}</p>
+                        </div>
+                    @endforeach
+                    @endif
                 </div>
                 <!-- About Section Button-->
                 <div class="text-center mt-4">
