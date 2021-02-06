@@ -8,10 +8,7 @@ use App\About;
 
 class PagesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
     
     public function index() {
         $main = Main::first();
@@ -19,7 +16,4 @@ class PagesController extends Controller
         return view('pages.index', compact('main','about'));
     }
 
-    public function dashboard() {
-        return view('pages.dashboard');
-    }
 }

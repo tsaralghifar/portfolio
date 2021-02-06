@@ -12,6 +12,10 @@ class MainPagesController extends Controller
     {
         $this->middleware('auth');
     }
+    
+    public function dashboard() {
+        return view('pages.dashboard');
+    }
     /**
      * Display a listing of the resource.
      *

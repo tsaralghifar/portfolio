@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\About;
-use App\Http\Requests\AboutRequest;
+use App\Portfolio;
+use App\Http\Requests\PortfolioRequest;
 
-class AboutPagesController extends Controller
+class PortfolioPagesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -19,8 +24,8 @@ class AboutPagesController extends Controller
      */
     public function list()
     {
-        $about =  About::all();
-        return view('pages.about.list', compact('about'));
+        $portfolio =  Portfolio::all();
+        return view('pages.portfolio.list', compact('portfolio'));
     }
 
     /**
@@ -30,7 +35,7 @@ class AboutPagesController extends Controller
      */
     public function create()
     {
-        return view('pages.about.create');
+        return view('pages.portfolio.create');
     }
 
     /**
@@ -39,20 +44,27 @@ class AboutPagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AboutRequest $request)
+    public function store(PortfolioRequest $request)
     {
-        $about = new About;
-        $about->judul = $request->judul;
-        $about->picture = $request->picture;
-        $about->description = $request->description;
+        // $data = new Portfolio;
+        // $data->nama_app = $request->nama_app;
+        // $data->desc = $request->desc;
+        // $data->github = $request->github;
 
-        $about->save();
-        return redirect()->route('admin.about.create');
+        // $nama_app = $request->file('nama_app');
+        // Storage::putFile('public/img/', $nama_app);
+        // $data->nama_app = "assets/img/portfolio/".$nama_app->hashName();
 
-        // $data = $request->all();
+        // $data->save();
+        // return redirect()->route('admin.portfolio.create');
 
-        // About::create($data);
-        // return redirect()->route('admin.about.create');
+        $data = $request->all();
+        $data['gambar'] = $request->file('gambar')->store(
+            'storage/img', 'public'
+        );
+
+         Portfolio::create($data);
+        return redirect()->route('admin.portfolio.create');
     }
 
     /**
@@ -75,7 +87,7 @@ class AboutPagesController extends Controller
     public function edit($id)
     {
         $about = About::find($id);
-        return view('pages.about.edit', compact('about'));
+        return view('pages.portfolio.edit', compact('portfolio'));
     }
 
     /**
@@ -85,14 +97,14 @@ class AboutPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AboutRequest $request, $id)
+    public function update(PortfolioRequest $request, $id)
     {
         $data = About::find($id);
         $data->judul = $request->judul;
         $data->picture = $request->picture;
         $data->description = $request->description;
         $data->save();
-        return redirect()->route('admin.about.list');
+        return redirect()->route('admin.portfolio.list');
     }
 
     /**
@@ -103,9 +115,9 @@ class AboutPagesController extends Controller
      */
     public function destroy($id)
     {
-        $about = About::findOrFail($id);
-        $about->delete();
+        $data = Portfolio::findOrFail($id);
+        $data->delete();
 
-        return redirect()->route('admin.about.list');
+        return redirect()->route('admin.portfolio.list');
     }
 }
