@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Portfolio;
 use App\Http\Requests\PortfolioRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioPagesController extends Controller
 {
@@ -24,8 +25,8 @@ class PortfolioPagesController extends Controller
      */
     public function list()
     {
-        $portfolio =  Portfolio::all();
-        return view('pages.portfolio.list', compact('portfolio'));
+        $portfolios =  Portfolio::all();
+        return view('pages.portfolios.list', compact('portfolios'));
     }
 
     /**
@@ -35,7 +36,7 @@ class PortfolioPagesController extends Controller
      */
     public function create()
     {
-        return view('pages.portfolio.create');
+        return view('pages.portfolios.create');
     }
 
     /**
@@ -51,20 +52,22 @@ class PortfolioPagesController extends Controller
         // $data->desc = $request->desc;
         // $data->github = $request->github;
 
-        // $nama_app = $request->file('nama_app');
-        // Storage::putFile('public/img/', $nama_app);
-        // $data->nama_app = "assets/img/portfolio/".$nama_app->hashName();
+        // $gambar = $request->file('gambar');
+        // Storage::putFile('public/img/', $gambar);
+        // $data->gambar = "assets/img/".$gambar->hashName();
+
+        // // return $data;
 
         // $data->save();
-        // return redirect()->route('admin.portfolio.create');
+        // return redirect()->route('admin.portfolio.list');
 
-        $data = $request->all();
-        $data['gambar'] = $request->file('gambar')->store(
-            'storage/img', 'public'
+        $portfolio = $request->all();
+        $portfolio['gambar'] = $request->file('gambar')->store(
+            'assets/img/', 'public'
         );
 
-         Portfolio::create($data);
-        return redirect()->route('admin.portfolio.create');
+         Portfolio::create($portfolio);
+        return redirect()->route('admin.portfolios.list');
     }
 
     /**
@@ -86,8 +89,8 @@ class PortfolioPagesController extends Controller
      */
     public function edit($id)
     {
-        $about = About::find($id);
-        return view('pages.portfolio.edit', compact('portfolio'));
+        $portfolio = Portfolio::find($id);
+        return view('pages.portfolios.edit', compact('portfolio'));
     }
 
     /**
@@ -99,12 +102,35 @@ class PortfolioPagesController extends Controller
      */
     public function update(PortfolioRequest $request, $id)
     {
-        $data = About::find($id);
-        $data->judul = $request->judul;
-        $data->picture = $request->picture;
-        $data->description = $request->description;
+        // $data = About::find($id);
+        // $data->judul = $request->judul;
+        // $data->picture = $request->picture;
+        // $data->description = $request->description;
+        // $data->save();
+        // return redirect()->route('admin.portfolio.list');
+
+        
+        // $portfolio = Portfolio::find($id);
+        // $portfolio['gambar'] = $request->file('gambar')->store(
+        //     'assets/img/', 'public'
+        // );
+
+        // Portfolio::update($portfolio);
+        // return redirect()->route('admin.portfolios.list');
+
+        $data = Portfolio::find($id);
+        $data->nama_app = $request->nama_app;
+        $data->desc = $request->desc;
+        $data->github = $request->github;
+
+        $data['gambar'] = $request->file('gambar')->store(
+            'assets/img/', 'public'
+        );
+
+        // return $data;
+
         $data->save();
-        return redirect()->route('admin.portfolio.list');
+        return redirect()->route('admin.portfolios.list');
     }
 
     /**
@@ -116,8 +142,9 @@ class PortfolioPagesController extends Controller
     public function destroy($id)
     {
         $data = Portfolio::findOrFail($id);
+        @unlink(public_path($data->gambar));
         $data->delete();
 
-        return redirect()->route('admin.portfolio.list');
+        return redirect()->route('admin.portfolios.list');
     }
 }

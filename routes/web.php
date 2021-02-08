@@ -29,12 +29,12 @@ Route::prefix('admin')->group(function(){
     Route::get('/about/edit{id}', 'AboutPagesController@edit')->name('admin.about.edit');
     Route::put('/about/update{id}', 'AboutPagesController@update')->name('admin.about.update');
     Route::delete('/about/destroy{id}', 'AboutPagesController@destroy')->name('admin.about.destroy');
-    Route::get('/portfolio/create', 'PortfolioPagesController@create')->name('admin.portfolio.create');
-    Route::put('/portfolio/create', 'PortfolioPagesController@store')->name('admin.portfolio.store');
-    Route::get('/portfolio/list', 'PortfolioPagesController@list')->name('admin.portfolio.list');
-    Route::get('/portfolio/edit{id}', 'PortfolioPagesController@edit')->name('admin.portfolio.edit');
-    Route::put('/portfolio/update{id}', 'PortfolioPagesController@update')->name('admin.portfolio.update');
-    Route::delete('/portfolio/destroy{id}', 'PortfolioPagesController@destroy')->name('admin.portfolio.destroy');
+    Route::get('/portfolios/create', 'PortfolioPagesController@create')->name('admin.portfolios.create');
+    Route::put('/portfolios/create', 'PortfolioPagesController@store')->name('admin.portfolios.store');
+    Route::get('/portfolios/list', 'PortfolioPagesController@list')->name('admin.portfolios.list');
+    Route::get('/portfolios/edit{id}', 'PortfolioPagesController@edit')->name('admin.portfolios.edit');
+    Route::put('/portfolios/update{id}', 'PortfolioPagesController@update')->name('admin.portfolios.update');
+    Route::delete('/portfolios/destroy{id}', 'PortfolioPagesController@destroy')->name('admin.portfolios.destroy');
 });
 
 

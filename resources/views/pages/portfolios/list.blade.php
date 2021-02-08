@@ -19,23 +19,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @if (count($portfolio) > 0)
-                    @foreach ($portfolio as $portfolios)
+                    @foreach ($portfolios as $portfolio)
                   <tr>
-                    <th scope="row">{{ $portfolios->id }}</th>
-                    <td>{{ $portfolios->nama_app }}</td>
+                    <th scope="row">{{ $portfolio->id }}</th>
+                    <td>{{ $portfolio->nama_app }}</td>
                     <td>
-                      <img src="{{ url($portfolios->gambar) }}" alt="">
+                      <img style="height: 30px" src="{{Storage::url($portfolio->gambar)}}">
                     </td>
-                    <td>{{ Str::limit(strip_tags($portfolios->desc),40) }}</td>
-                    <td>{{ $portfolios->github }}</td>
+                    <td>{{ Str::limit(strip_tags($portfolio->desc),40) }}</td>
+                    <td>{{ $portfolio->github }}</td>
                     <td>
                         
-                                <a href="{{ route('admin.portfolio.edit', $portfolios->id) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.portfolios.edit', $portfolio->id) }}" class="btn btn-primary btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             
-                                <form action="{{ route('admin.portfolio.destroy', $portfolios->id) }}" method="post" class="d-inline">
+                                <form action="{{ route('admin.portfolios.destroy', $portfolio->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger btn-sm">
@@ -45,7 +44,6 @@
                     </td>
                   </tr>
                     @endforeach
-                    @endif
                 </tbody>
               </table>
     </main>

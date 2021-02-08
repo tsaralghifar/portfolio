@@ -67,8 +67,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{route('admin.portfolio.create')}}">Create</a>
-                                    <a class="nav-link" href="{{route('admin.portfolio.list')}}">List</a>
+                                    <a class="nav-link" href="{{route('admin.portfolios.create')}}">Create</a>
+                                    <a class="nav-link" href="{{route('admin.portfolios.list')}}">List</a>
                                 </nav>
                             </div>
                             <a class="nav-link" href="#">

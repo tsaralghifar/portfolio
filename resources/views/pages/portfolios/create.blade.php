@@ -7,7 +7,7 @@
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Portfolio</li>
                 </ol>
-                    <form action="{{route('admin.portfolio.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.portfolios.store')}}" method="post" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="row">
